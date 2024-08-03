@@ -57,9 +57,9 @@ http {
 
         error_page 404 /404.html;
 
-	# nginx gradio ayarları
+	
         location / {
-	client_max_body_size 100M; # görüntü yükleme boyutu izni
+	client_max_body_size 100M;
 	proxy_pass http://127.0.0.1:7860/;
         proxy_buffering off;
         proxy_redirect off;
