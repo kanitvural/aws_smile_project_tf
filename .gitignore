@@ -168,3 +168,6 @@ cython_debug/
 
 userdata.txt
 .terraform.tfstate.lock.info
+terraform.tfstate
+terraform.tfstate.backup
+
