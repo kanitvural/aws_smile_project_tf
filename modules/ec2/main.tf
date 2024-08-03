@@ -6,7 +6,7 @@ resource "aws_instance" "web" {
   security_groups = [data.aws_security_group.default.id]
   associate_public_ip_address = true
 
-  user_data = "${file("init.sh")}"
+  user_data = file("${path.module}/init.sh")
 
   tags = {
     Name = "SmileEC2Instance"

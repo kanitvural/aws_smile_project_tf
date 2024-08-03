@@ -9,8 +9,8 @@ After=network.target
 [Service]
 User=ec2-user
 Group=ec2-user
-WorkingDirectory=/home/ec2-user/aws_smile_project/
-ExecStart=/home/ec2-user/aws_smile_project/venv/bin/python3 /home/ec2-user/aws_smile_project/smile_app.py
+WorkingDirectory=/home/ec2-user/aws_smile_project_tf/
+ExecStart=/home/ec2-user/aws_smile_project/venv/bin/python3 /home/ec2-user/aws_smile_project_tf/smile_app.py
 Restart=always
 RestartSec=5
 
