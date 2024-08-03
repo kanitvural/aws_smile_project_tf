@@ -1,3 +1,10 @@
+
+resource "local_file" "nginx_conf" {
+  content  = file("${path.module}/nginx.conf")
+  filename = "${path.module}/nginx.conf"
+}
+
+
 resource "aws_instance" "web" {
   ami           = var.ami_id
   instance_type = var.instance_type
