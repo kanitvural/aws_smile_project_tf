@@ -8,7 +8,8 @@ sudo dnf install git python3.11 python3.11-pip nginx -y
 sleep 20
 
 sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.original
-sudo cp ${local_file.nginx_conf.filename} /etc/nginx/nginx.conf
+sudo cp /home/ec2-user/aws_smile_project_tf/nginx.conf /etc/nginx/nginx.conf
+
 
 
 sudo systemctl enable nginx
