@@ -1,8 +1,11 @@
 #!/bin/bash
 
+sleep 10
 # Git deposunu klonla
 sudo dnf update -y
 sudo dnf install git python3.11 python3.11-pip nginx -y
+
+sleep 20
 
 sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.original
 
@@ -67,9 +70,8 @@ http {
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
         proxy_set_header Host $host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $host;
         proxy_set_header X-Forwarded-Proto $scheme;
-
 }
         location = /404.html {
         }
@@ -112,9 +114,12 @@ EOL
 sudo systemctl enable nginx
 sudo systemctl start nginx
 
+sleep 10
+
 # project download
 git clone https://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@github.com/kntvrl/aws_smile_project_tf.git /home/ec2-user/aws_smile_project_tf
 
+sleep 5
 
 # service setup
 sudo tee /etc/systemd/system/smile.service > /dev/null <<EOL
