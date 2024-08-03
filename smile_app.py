@@ -158,8 +158,8 @@ with gr.Blocks() as app:
             
 
 if __name__ == "__main__":
-    send_email("send", "verification")
-    post_records("initialize", "database")
+    # send_email("send", "verification")
+    # post_records("initialize", "database")
     app.launch(server_name="0.0.0.0")
     
     
