@@ -71,10 +71,24 @@ output "lambda_role_arn" {
   value = aws_iam_role.lambda_execution_role.arn
 }
 
-# Lambda modülünü çağırma
+
 module "lambda" {
   source           = "./modules/lambda"
   lambda_functions = local.lambda_functions
   lambda_role_arn  = aws_iam_role.lambda_execution_role.arn
   os_type          = local.os_type
+}
+
+
+# API GATAWAY
+
+
+module "api_gateway" {
+  source = "./modules/api_gateway"
+
+  aws_region               = "eu-west-2"
+  lambda_detection_arn     = module.lambda.lambda_function_arns[0]
+  lambda_rekognition_arn   = module.lambda.lambda_function_arns[1]
+  lambda_records_arn       = module.lambda.lambda_function_arns[2]
+  lambda_email_arn         = module.lambda.lambda_function_arns[3]
 }

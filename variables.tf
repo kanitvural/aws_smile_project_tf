@@ -92,3 +92,5 @@ variable "linux_paths" {
     }
   }
 }
+
+# api gateway
