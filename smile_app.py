@@ -119,7 +119,6 @@ with gr.Blocks() as app:
             with gr.Column(scale=1): 
                 recognize_output = gr.HTML(label="Recognition Output")
             
-        #upload_output = gr.Textbox(label="Upload Output")
           
 
         image_input.change(smile_with_interval, inputs=[image_input])\

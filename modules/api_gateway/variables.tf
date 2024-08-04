@@ -22,4 +22,3 @@ variable "lambda_email_arn" {
   description = "ARN of the email Lambda function"
   type        = string
 }
-

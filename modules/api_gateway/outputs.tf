@@ -24,4 +24,3 @@ output "detection_url" {
 }
 
 
-
