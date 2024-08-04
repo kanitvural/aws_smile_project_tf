@@ -1,5 +1,3 @@
-# outputs
-
 output "instance_id" {
   value = module.ec2.instance_id
 }
@@ -27,8 +25,3 @@ output "email_url" {
 output "detection_url" {
   value = module.api_gateway.detection_url
 }
-
-
-
-
-

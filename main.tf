@@ -2,19 +2,19 @@ provider "aws" {
   region = "eu-west-2" # londra region
 }
 
-module "vpc" {
-  source = "./modules/vpc"
-}
+# module "vpc" {
+#   source = "./modules/vpc"
+# }
 
-module "ec2" {
-  source    = "./modules/ec2"
-  subnet_ids = module.vpc.subnet_ids
-  vpc_id     = module.vpc.vpc_id
-}
+# module "ec2" {
+#   source    = "./modules/ec2"
+#   subnet_ids = module.vpc.subnet_ids
+#   vpc_id     = module.vpc.vpc_id
+# }
 
-module "s3" {
-  source = "./modules/s3"
-}
+# module "s3" {
+#   source = "./modules/s3"
+# }
 
 
 # LAMBDA
@@ -94,4 +94,6 @@ module "api_gateway" {
   lambda_records_arn       = module.lambda.lambda_function_arns[2]
   lambda_email_arn         = module.lambda.lambda_function_arns[3]
 }
+
+
 
