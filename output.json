@@ -1,0 +1,7 @@
+{
+  "lambda_role_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:iam::058264126563:role/lambda_execution_role"
+  }
+}
