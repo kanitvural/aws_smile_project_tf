@@ -1,51 +1,54 @@
-# INTRODUCTION
 
-The use of AWS Cloud systems is becoming increasingly common. Small and large-scale companies, recognizing this trend, are transitioning to AWS systems.
+# Building a Smile-Based Access Control System Using AWS: Let Your Smile Be Your Password
 
-AWS systems offer significant advantages, especially for startups. They help startups avoid large investment costs and enable them to bring their projects to life quickly. Additionally, if you promote your project, Amazon can provide credits of up to 2000 USD.
 
-I quickly developed a face detection application using AWS systems, utilizing the Rekognition service. I was able to realize my envisioned project quickly without the need to train any models.
 
-Below are the project introduction and information on how it works. I have also prepared an installation section for those who want to try it out. You can easily integrate it into your AWS account using Terraform and test it.
+## Introduction
+
+The adoption of AWS Cloud systems is rapidly increasing as both small and large enterprises recognize their advantages. AWS provides startups with significant benefits, enabling rapid project deployment while avoiding substantial upfront costs. Moreover, AWS offers promotional credits of up to $2,000 for project promotions.
+
+In this article, I will guide you through the creation of a face detection application using AWS Rekognition. This project allowed me to quickly bring my vision to life without the need for extensive model training.
+
+Below, you'll find an overview of the project, how it operates, and a step-by-step installation guide for those interested in trying it out. With Terraform, you can easily integrate this project into your AWS account and test it.
+
+---
 
 
 ---
 
 
-# SMILE APP
+## The SMILE App
 
 <div align="center">
   <img src="images/logo.png" alt="Local Image" width="500"/>
 </div>
 
-## Let your smile be your password.
+### Let your smile be your password.
 
 Kanıt VURAL  
 - [linkedin](https://www.linkedin.com/in/kanitvural/)
 - [E-mail](mailto:kanitvural@gmail.com)
 
 
-### Why SMILE app:
+### Why the SMILE App?
 
-- Companies today often use card systems for employee entries.
-- These systems can be costly due to card expenses and related device installations.
-- Employees may forget their cards at home.
-- In companies with many employees, individuals may use each other's cards.
-- It can also be used for internal system logins.
+- Many companies rely on card-based systems for employee access.
+- These systems can be costly due to card and device expenses.
+- Employees might forget their cards or use each other's cards, leading to security concerns.
+- The SMILE app offers a cost-effective alternative using AWS technologies.
 
-To prevent all these problems, I aimed to provide a cost-effective solution using AWS systems.
+### What Does the SMILE App Do?
 
-### What does SMILE app do:
+- Captures and records employees' faces. A smile in front of the camera grants access without the need for physical cards.
+- Notifies a group of managers via email with the names of employees entering the premises.
+- Analyzes entry data with hourly, daily, weekly, and yearly graphs.
 
-- Employees' faces are recorded in the system. When they look at the camera and smile, they enter the company without needing anything else.
-- The names of entering employees are emailed to a group of managers.
-- Entry information is analyzed with hourly, daily, weekly, and yearly graphs.
+### Purpose
 
-### Purpose:
+The SMILE app is designed to cut costs and mitigate the issues associated with traditional card-based access systems. By leveraging AWS, it eliminates the need for physical cards and works on-demand, making it both efficient and economical.
 
-- The SMILE app aims to reduce costs and prevent the mentioned problems by working on-demand using AWS systems without the need for any cards.
+This presentation will guide you through a simulated internal company system access scenario.
 
-This presentation will simulate an entry into an internal company system.
 
 ### TECHNOLOGIES USED
 
@@ -54,25 +57,17 @@ This presentation will simulate an entry into an internal company system.
 </div>
 
 
-### HOW SMILE APP WORKS
+### How the SMILE App Works
 
-- The system runs within the lowest-cost EC2 instance inside a VPC.
-- When the system is run, DynamoDB and SES services are automatically created by sending a request to the API Gateway.
-- The SES service sends a verification message to the admin group. Admin group email addresses are recorded.
-- Since the EC2 acts as an intermediary that receives and sends requests, this setup eliminates the need for a costly machine.
-- On the web interface broadcasted from EC2, a single photo of new employees is saved to S3.
-- When the camera is turned on, the images are again saved in another folder in S3.
-- After the saving process, a request is sent to the AWS API Gateway.
-- When the request is sent, Lambda is triggered, and the AWS Rekognition face detection model analyzes the face in the saved photo and detects a smile.
-- If there is no smile, instead of returning a simple error message, a fine-tuned GPT model makes a joke.
-- If a smile is detected, another request is sent to the AWS API Gateway.
-- Then another Lambda is triggered, and the AWS Rekognition face comparison model compares the photo with the photos in the archive.
-- If it matches a photo in the archive, the user enters the company.
-- Then, a request is sent again to the API Gateway. Lambda is triggered, and the employee's name, surname, entry time, and entry photo are saved to DynamoDB.
-- Another triggered Lambda sends an email to the manager group via the SES service.
-- Users who enter can also be tracked, and analyses can be viewed through the system.
-
-In this setup, the only continuously running service is the lowest-cost EC2. All other services work on-demand when a request is made, creating a cost-effective structure.
+- Runs on a low-cost EC2 instance within a VPC.
+- Automatically provisions DynamoDB and SES services upon initial setup via API Gateway.
+- SES sends a verification message to the admin group, with email addresses recorded for future notifications.
+- The EC2 instance acts as an intermediary, handling requests without the need for a more expensive machine.
+- New employee photos are saved to S3, and camera images are stored in a separate S3 folder.
+- AWS Rekognition analyzes the images to detect smiles.
+- If a smile is detected, another request triggers AWS Rekognition’s face comparison model to verify identity.
+- Verified entries are logged in DynamoDB, and managers are notified via SES.
+- The system is designed for on-demand operation, keeping costs minimal.
 
 
 ### System Architecture Diagram
@@ -82,7 +77,7 @@ In this setup, the only continuously running service is the lowest-cost EC2. All
 </div>
 
 
-### INSTALLATION GUIDE
+### Installation Guide
 
 Open an AWS account:
 https://aws.amazon.com/free/
@@ -93,15 +88,17 @@ https://www.hashicorp.com/
 
 **Create Keypair for ec2:**
 
-- only change your username (Windows users can use git bash)
+- Only change your username (Windows users can use git bash)
   
 `ssh-keygen -t rsa -b 2048 -f C:/Users/YOUR_USERNAME/Desktop/smile2.pem`
 
-**Download repo:**
+**Clone the Repository:**
 
 `git clone https://github.com/kntvrl/aws_smile_project_tf.git`
 
-**You can use vscode editor or whatever you want:**
+**Deploy with Terraform**
+
+You can use vscode editor or whatever you want:
 
 ```
 cd aws_smile_project_tf
@@ -110,7 +107,7 @@ terraform plan
 terraform apply
 Enter a value: yes
 ```
-**Copy terraform outputs:**
+**Copy Terraform Outputs:**
 
 <div align="left">
   <img src="images/terminal.png" alt="Local Image" width="800"/>
@@ -205,7 +202,7 @@ example:
 
 **Welcome to smile app**
 
-When you open the application, firstly record one picture of you and type your Firstname and Lastname and click add person to the system button.
+Record your picture and add your first and last name. Click “Add Person to the System” to register.
 
 <div align="left">
   <img src="images/add_person.png" alt="Local Image" width="800"/>
@@ -213,7 +210,7 @@ When you open the application, firstly record one picture of you and type your F
 
 ---
 
-After that open your camera and smile :)
+Open your camera and smile :)
 
 <div align="left">
   <img src="images/webcam.png" alt="Local Image" width="800"/>
@@ -238,15 +235,15 @@ And check your mailbox
 
 ---
 
-**How to delete the Smile app**
+**How to Delete the SMILE app**
 
-Go back your editor and type
+Go back your editor and run
 
 `terraform destroy`
 
-I created Lambda functions to build DynamoDB and SES services automatically, so we need to delete these services manually.
+Manually delete DynamoDB and SES services from AWS Console.
 
-Go to dynamodb service > Tables > select the db and delete.
+dynamodb service > Tables > select the db and delete.
 
 <div align="left">
   <img src="images/dynamo_delete.png" alt="Local Image" width="800"/>
@@ -254,7 +251,7 @@ Go to dynamodb service > Tables > select the db and delete.
 
 ---
 
-Go to ses service > identities > select your mail and delete. That's all.
+ses service > identities > select your mail and delete.
 
 <div align="left">
   <img src="images/ses_delete.png" alt="Local Image" width="800"/>
@@ -262,13 +259,12 @@ Go to ses service > identities > select your mail and delete. That's all.
 
 ---
 
-# OPTIONAL
+# Optional
 
-If you have a open ai api key, go to utils.py in ec2 instance and commend out the codes below. An add your api key to .env file in ec2 and restart the service.
+If you have an OpenAI API key, you can enable ChatGPT to make jokes when it detects you not smiling at the camera. Update `utils.py` in the EC2 instance by commenting out the relevant code sections, add your API key to the `.env` file, and restart the service.
 
 `sudo nano utils.py`
 
-After doing this, if ChatGPT doesn’t see you smiling at the camera, it will start telling you jokes!
 
 <div align="left">
   <img src="images/chatgpt.png" alt="Local Image" width="800"/>
@@ -281,9 +277,9 @@ After doing this, if ChatGPT doesn’t see you smiling at the camera, it will st
 `sudo systemctl restart smile`
 
 
-# CONCLUSION
+# Conclusion
 
-I tried to explain how to easily create a face recognition application using AWS systems. Feel free to contact me with any questions. Wishing everyone days full of laughter!
+This guide demonstrates how to set up a face recognition-based access control system using AWS. For questions or further assistance, feel free to contact me. May your days be filled with smiles!
 
 Kanıt VURAL  
 - [linkedin](https://www.linkedin.com/in/kanitvural/)
