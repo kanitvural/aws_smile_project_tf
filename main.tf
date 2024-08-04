@@ -1,21 +1,36 @@
 provider "aws" {
-  region = "eu-west-2" # Londra bölgesi
+  region = "eu-west-2" # londra region
 }
 
-# module "vpc" {
-#   source = "./modules/vpc"
-# }
+module "vpc" {
+  source = "./modules/vpc"
+}
 
-# module "ec2" {
-#   source    = "./modules/ec2"
-#   subnet_ids = module.vpc.subnet_ids
-#   vpc_id     = module.vpc.vpc_id
-# }
+module "ec2" {
+  source    = "./modules/ec2"
+  subnet_ids = module.vpc.subnet_ids
+  vpc_id     = module.vpc.vpc_id
+}
 
-# module "s3" {
-#   source = "./modules/s3"
-# }
+module "s3" {
+  source = "./modules/s3"
+}
 
+resource "null_resource" "upload_outputs" {
+  provisioner "local-exec" {
+    command = <<EOT
+    terraform output -json > outputs.json
+    aws s3 cp outputs.json s3://${aws_s3_bucket.main.bucket}/outputs.json
+    EOT
+  }
+
+  depends_on = [
+    aws_s3_bucket.main
+  ]
+}
+
+
+# LAMBDA
 locals {
   is_linux   = length(regexall("/home/", lower(abspath(path.root)))) > 0
   is_windows = length(regexall("c:\\\\", lower(abspath(path.root)))) > 0
@@ -44,7 +59,7 @@ locals {
   ]
 }
 
-# IAM rolü oluşturma ve politikalarını tanımlama
+# IAM roles
 resource "aws_iam_role" "lambda_execution_role" {
   name               = "lambda_execution_role"
 
