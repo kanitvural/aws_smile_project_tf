@@ -232,18 +232,17 @@ def send_email(firstname, lastname):
 
 def generate_joke():
     
+#     response = client.chat.completions.create(
+#         model="gpt-3.5-turbo", 
+#         messages=[
+#             {"role": "system", "content": "You are a comedy assistant and you make short, witty puns. I want you to make jokes that are connected to everyday life and creative. Your jokes should include puns and irony, be short, and concise."},
+#             {"role": "user", "content": "Make me a very funny joke. Write only the joke you produce as a response without using additional words, and fit it within 50 words. Your response should not exceed 50 words."}
+#         ],
+#         max_tokens=80,
+#         temperature=0.9
+#     )
     
-    # response = client.chat.completions.create(
-    #     model="gpt-3.5-turbo", 
-    #     messages=[
-    #         {"role": "system", "content": "Sen bir komedi asistanısın ve kısa, zekice kelime oyunları yapıyorsun. Türk kültürüne uygun, günlük yaşamla bağlantılı ve yaratıcı espriler yapmanı istiyorum. Esprilerin kelime oyunları ve ironiyi içermeli, kısa ve öz olmalı."},
-    #         {"role": "user", "content": "Bana çok komik bir Türk espirisi yap. Cevap olarak ilave kelime kullanmadan sadece ürettiğin mesajı yaz ve 50 kelimeye sığdır. Yanıtın 50 kelimeyi geçmesin."}
-    #     ],
-    #     max_tokens=80,
-    #     temperature=0.9
-    # )
-    
-    # message = response.choices[0].message.content
+#     message = response.choices[0].message.content
     message = "Why was the data scientist sad? Because he had too many missing values in his life!"
     return message
     
