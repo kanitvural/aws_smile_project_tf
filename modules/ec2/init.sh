@@ -8,7 +8,7 @@ sudo dnf install git python3.11 python3.11-pip nginx -y
 sleep 20
 
 # project download
-git clone https://kntvrl/aws_smile_project_tf.git /home/ec2-user/aws_smile_project_tf
+git clone https://github.com/kntvrl/aws_smile_project_tf.git /home/ec2-user/aws_smile_project_tf
 
 sleep 10
 
