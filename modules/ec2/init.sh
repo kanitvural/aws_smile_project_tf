@@ -12,27 +12,6 @@ git clone https://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@github.com/kntvrl/aws
 
 sleep 10
 
-# env update
-
-aws s3 cp s3://kntbucketlondon/outputs.json /home/ec2-user/outputs.json
-
-# JSON dosyasından değerleri oku
-RECOGNITION_URL=$(jq -r '.recognition_url.value' /home/ec2-user/outputs.json)
-RECORDS_URL=$(jq -r '.records_url.value' /home/ec2-user/outputs.json)
-EMAIL_URL=$(jq -r '.email_url.value' /home/ec2-user/outputs.json)
-DETECTION_URL=$(jq -r '.detection_url.value' /home/ec2-user/outputs.json)
-
-# RECOGNITION_URL="${recognition_url}"
-# RECORDS_URL="${records_url}"
-# EMAIL_URL="${email_url}"
-# DETECTION_URL="${detection_url}"
-
-ENV_FILE="/home/ec2-user/aws_smile_project_tf/.env"
-
-sed -i "s|^RECOGNITION_URL=.*|RECOGNITION_URL=$RECOGNITION_URL|" $ENV_FILE
-sed -i "s|^RECORDS_URL=.*|RECORDS_URL=$RECORDS_URL|" $ENV_FILE
-sed -i "s|^EMAIL_URL=.*|EMAIL_URL=$EMAIL_URL|" $ENV_FILE
-sed -i "s|^DETECTION_URL=.*|DETECTION_URL=$DETECTION_URL|" $ENV_FILE
 
 #nginx setup
 sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.original
@@ -59,8 +38,8 @@ WantedBy=multi-user.target
 EOL
 
 sudo systemctl daemon-reload
-sudo systemctl start smile.service
-sudo systemctl enable smile.service
+# sudo systemctl start smile.service
+# sudo systemctl enable smile.service
 
 
 # setup venv

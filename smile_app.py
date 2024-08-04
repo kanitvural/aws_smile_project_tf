@@ -1,17 +1,16 @@
 
 
 import gradio as gr
-from utils import smile, archive, recognize, post_records, check_db, get_records_from_db, send_email, smile_with_interval, detect_face_smile, generate_turkish_joke
+from utils import archive, recognize, post_records, check_db, get_records_from_db, send_email, smile_with_interval, detect_face_smile, generate_joke
 import plotly.express as px
 import threading
 
-# gradio smile_app.py --demo-name=app
 
-message = "Karadenizliler sınır kapısına nerden girer?: Haburdan..."
+message = "Why was the data scientist sad? Because he had too many missing values in his life!"
 
 def update_message():
     global message
-    message = generate_turkish_joke()
+    message = generate_joke()
     threading.Timer(10, update_message).start()
 
 update_timer = threading.Timer(0, update_message)
@@ -73,11 +72,11 @@ def process_recognition_output(output):
             full_name_out = name_parts[0].capitalize() + " " + name_parts[1].split(".")[0].capitalize()
             first_name_db = name_parts[0].lower()
             last_name_db = name_parts[1].split(".")[0].lower()
-            return f'<p style="color: green; font-size: 36px; font-weight: bold;">Hoşgeldiniz {full_name_out} iyi çalışmalar dileriz :)</p>', first_name_db, last_name_db
+            return f'<p style="color: green; font-size: 36px; font-weight: bold;">Welcome {full_name_out}. Have a nice day :)</p>', first_name_db, last_name_db
         else:
-            return '<p style="color: red; font-size: 36px; font-weight: bold;">Giriş izniniz yoktur.</p>', False, False
+            return '<p style="color: red; font-size: 36px; font-weight: bold;">You do not have access permission.</p>', False, False
     else:
-        return '<p style="color: red; font-size: 36px; font-weight: bold;">Giriş izniniz yoktur.</p>', False, False
+        return '<p style="color: red; font-size: 36px; font-weight: bold;">You do not have access permission.</p>', False, False
 
     
 
@@ -111,7 +110,7 @@ with gr.Blocks() as app:
     gr.Markdown("# SMILE app v1.0.0")
             
     with gr.Tab("Camera"):
-        gr.Markdown("Şifreniz Gülüşünüz :)")
+        gr.Markdown("Your Smile is your password :)")
         
         with gr.Row():
             
@@ -158,8 +157,8 @@ with gr.Blocks() as app:
             
 
 if __name__ == "__main__":
-    # send_email("send", "verification")
-    # post_records("initialize", "database")
+    send_email("send", "verification")
+    post_records("initialize", "database")
     app.launch(server_name="0.0.0.0")
     
     

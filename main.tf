@@ -16,19 +16,6 @@ module "s3" {
   source = "./modules/s3"
 }
 
-resource "null_resource" "upload_outputs" {
-  provisioner "local-exec" {
-    command = <<EOT
-    terraform output -json > outputs.json
-    aws s3 cp outputs.json s3://${aws_s3_bucket.main.bucket}/outputs.json
-    EOT
-  }
-
-  depends_on = [
-    aws_s3_bucket.main
-  ]
-}
-
 
 # LAMBDA
 locals {
@@ -108,19 +95,3 @@ module "api_gateway" {
   lambda_email_arn         = module.lambda.lambda_function_arns[3]
 }
 
-
-output "recognition_url" {
-  value = module.api_gateway.recognition_url
-}
-
-output "records_url" {
-  value = module.api_gateway.records_url
-}
-
-output "email_url" {
-  value = module.api_gateway.email_url
-}
-
-output "detection_url" {
-  value = module.api_gateway.detection_url
-}

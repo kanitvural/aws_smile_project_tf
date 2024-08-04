@@ -138,7 +138,7 @@ def detect_face_smile():
         response.raise_for_status()
         result = response.json()
         
-        # Smile özelliğini kontrol et
+       
         if result.get("FaceDetails"):
             for face in result["FaceDetails"]:
                 if "Smile" in face:
@@ -230,7 +230,7 @@ def send_email(firstname, lastname):
 
 # client = OpenAI(api_key=api_key)
 
-def generate_turkish_joke():
+def generate_joke():
     
     
     # response = client.chat.completions.create(
@@ -244,7 +244,7 @@ def generate_turkish_joke():
     # )
     
     # message = response.choices[0].message.content
-    message = "Karadenizliler sınır kapısına nerden girer?: Haburdan..."
+    message = "Why was the data scientist sad? Because he had too many missing values in his life!"
     return message
     
     
