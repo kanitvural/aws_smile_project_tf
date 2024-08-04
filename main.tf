@@ -92,3 +92,20 @@ module "api_gateway" {
   lambda_records_arn       = module.lambda.lambda_function_arns[2]
   lambda_email_arn         = module.lambda.lambda_function_arns[3]
 }
+
+
+output "recognition_url" {
+  value = module.api_gateway.recognition_url
+}
+
+output "records_url" {
+  value = module.api_gateway.records_url
+}
+
+output "email_url" {
+  value = module.api_gateway.email_url
+}
+
+output "detection_url" {
+  value = module.api_gateway.detection_url
+}
