@@ -50,7 +50,7 @@ The SMILE app is designed to cut costs and mitigate the issues associated with t
 This presentation will guide you through a simulated internal company system access scenario.
 
 
-### TECHNOLOGIES USED
+### Technologies Used
 
 <div align="center">
   <img src="images/techs.png" alt="Local Image" width="1000"/>
@@ -152,7 +152,7 @@ cd aws_smile_project_tf
 
 ---
 
-**copy the env variables from terraform output here (ctrl x > y > enter):**
+**Copy the env variables from terraform output here (ctrl x > y > enter):**
 
 `sudo nano .env`
 
@@ -172,13 +172,13 @@ cd aws_smile_project_tf
 
 ---
 
-**you can access the application with ec2_public_dns above:**
+**You can access the application with ec2_public_dns above:**
 ```
 example:
 ec2-18-171-252-102.eu-west-2.compute.amazonaws.com
 ```
 ---
-**SSL certification:**
+**SSL Certification:**
 
 I used nginx server in this project, so if you want to open camera you need ssl certification, http sites don't allow to open web cam.
 
